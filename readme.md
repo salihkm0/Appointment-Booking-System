@@ -1,70 +1,86 @@
-Appointment Booking System - README
+# Appointment Booking System
 
-How to Run the Project
+A full-stack Appointment Booking System built with **MERN stack** that allows service providers to manage availability and users to book appointments efficiently.
 
-1. Install dependencies for both frontend and backend
+---
 
-Backend
+## Tech Stack
+
+- **Frontend:** React + Vite  
+- **Backend:** Node.js + Express  
+- **Database:** MongoDB  
+- **Authentication:** JWT  
+
+---
+
+## Set Up Environment Variables
+
+#### Backend
+
+PORT=5033
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
+
+#### Frontend
+
+VITE_API_URL=http://localhost:5033/api
+
+## How to Run the Project
+
+#### Backend
 
 cd backend
 npm install
 npm run dev
 
-Frontend (in new terminal)
+#### Frontend
 
 cd frontend
 npm install
 npm run dev
 
-2. Set up environment variables
 
-Backend (.env file in backend folder):
+## How Booking Logic Works
 
-PORT=5033
-MONGODB_URI=
-JWT_SECRET=
-NODE_ENV=development
+### Core Booking Flow
 
-Frontend (.env file in frontend folder):
-VITE_API_URL=http://localhost:5033/api
+#### 1. Provider Setup
 
-3. Start both servers
-   npm run dev
+Creates services (e.g., Haircut - 30 mins - ₹50)
+Sets availability (Monday to Friday, 9 AM - 6 PM)
+Blocks dates (Holidays, Personal Leave)
 
-How Booking Logic Works
+#### 2. User Books Appointment
 
-Core Booking Flow
+Browses available services
+Selects service → system checks provider availability
+Selects date → generates available time slots
+Selects time slot → validates availability
+Confirms booking → appointment saved
 
-1. Provider Sets Up:
-   └── Creates Services (Haircut: 30 mins, $50)
-   └── Sets Availability (Mon-Fri, 9 AM - 6 PM)
-   └── Blocks Dates (Holidays, Personal Days)
+#### 3. System Validations
 
-2. User Books Appointment:
-   └── Browses available services
-   └── Selects service → checks provider availability
-   └── Chooses date → generates available time slots
-   └── Selects time slot → validates availability
-   └── Confirms booking → saves appointment
+Prevents past date bookings
+Avoids double booking
+Enforces provider working hours
+Respects service duration
 
-3. System Validations:
-   └── No past dates allowed
-   └── No double bookings
-   └── Only within provider's working hours
-   └── Respects service duration
 
-Time Slot Generation Algorithm
+### Time Slot Generation Algorithm
 
-Simplified logic:
+#### Simplified Logic Flow
 
-4. Get provider's working hours for selected day
-5. Check if date is blocked (holiday)
-6. Get existing appointments for that day
-7. Start from opening time
-8. For each 15-minute interval:
-   - Calculate slot start time
-   - Calculate slot end time (start + service duration)
-   - Check if slot overlaps with existing appointment
-   - Check if slot is within working hours
-   - If available, add to list
-9. Return available slots to user
+Get provider working hours for selected day
+Check if selected date is blocked
+Fetch existing appointments for that day
+Start from opening time
+Loop through every 15-minute interval
+
+For each slot:
+Calculate slot start time
+Calculate slot end time (start + service duration)
+Check overlap with existing appointments
+Check within working hours
+If valid → add to available slots
+Return all available slots to user
