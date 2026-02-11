@@ -17,10 +17,10 @@ A full-stack Appointment Booking System built with **MERN stack** that allows se
 
 #### Backend
 
-PORT=5033
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-NODE_ENV=development
+-PORT=5033
+-MONGODB_URI=your_mongodb_connection_string
+-JWT_SECRET=your_jwt_secret
+-NODE_ENV=development
 
 #### Frontend
 
