@@ -17,28 +17,15 @@ A full-stack Appointment Booking System built with **MERN stack** that allows se
 
 #### Backend
 
--PORT=5033
--MONGODB_URI=your_mongodb_connection_string
--JWT_SECRET=your_jwt_secret
--NODE_ENV=development
+- PORT=5033
+- MONGODB_URI=your_mongodb_connection_string
+- JWT_SECRET=your_jwt_secret
+- NODE_ENV=development
 
 #### Frontend
 
 VITE_API_URL=http://localhost:5033/api
 
-## How to Run the Project
-
-#### Backend
-
-cd backend
-npm install
-npm run dev
-
-#### Frontend
-
-cd frontend
-npm install
-npm run dev
 
 
 ## How Booking Logic Works
@@ -47,40 +34,43 @@ npm run dev
 
 #### 1. Provider Setup
 
-Creates services (e.g., Haircut - 30 mins - ₹50)
-Sets availability (Monday to Friday, 9 AM - 6 PM)
-Blocks dates (Holidays, Personal Leave)
+- Creates services (e.g., Haircut - 30 mins - ₹50)
+- Sets availability (Monday to Friday, 9 AM - 6 PM)
+- Blocks dates (Holidays, Personal Leave)
 
 #### 2. User Books Appointment
 
-Browses available services
-Selects service → system checks provider availability
-Selects date → generates available time slots
-Selects time slot → validates availability
-Confirms booking → appointment saved
+- Browses available services  
+- Selects service → system checks provider availability  
+- Selects date → generates available time slots  
+- Selects time slot → validates availability  
+- Confirms booking → appointment saved  
 
 #### 3. System Validations
 
-Prevents past date bookings
-Avoids double booking
-Enforces provider working hours
-Respects service duration
+- Prevents past date bookings  
+- Avoids double booking  
+- Enforces provider working hours  
+- Respects service duration  
 
+---
 
-### Time Slot Generation Algorithm
+## Time Slot Generation Algorithm
 
-#### Simplified Logic Flow
+### Simplified Logic Flow
 
-Get provider working hours for selected day
-Check if selected date is blocked
-Fetch existing appointments for that day
-Start from opening time
-Loop through every 15-minute interval
+1. Get provider working hours for selected day  
+2. Check if selected date is blocked  
+3. Fetch existing appointments for that day  
+4. Start from opening time  
+5. Loop through every **15-minute interval**  
 
-For each slot:
-Calculate slot start time
-Calculate slot end time (start + service duration)
-Check overlap with existing appointments
-Check within working hours
-If valid → add to available slots
-Return all available slots to user
+**For each slot:**
+
+- Calculate slot start time  
+- Calculate slot end time (start + service duration)  
+- Check overlap with existing appointments  
+- Check within working hours  
+- If valid → add to available slots  
+
+6. Return all available slots to user  
